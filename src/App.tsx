@@ -1,6 +1,7 @@
 import { createTheme, ThemeProvider } from '@material-ui/core'
 import { useMemo } from 'react'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
+import * as anchor from '@project-serum/anchor'
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import {
@@ -16,9 +17,10 @@ import {
 } from '@solana/wallet-adapter-wallets'
 import { Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
-import Home from './views/Home'
+
 import TopNav from './components/TopNav'
 import { CurrencyProvider } from './components/Currency'
+import Home from './views/Home'
 import Marketplace from './views/Marketplace'
 import CustomTokenMarketplace from './views/CustomTokenMarketplace'
 import MarketplaceWithFilter from './views/MarketplaceWithFilter'
@@ -30,10 +32,12 @@ import SingleOrder from './views/SingleOrder'
 
 require('@solana/wallet-adapter-react-ui/styles.css')
 
+const candyMachineId = new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID!)
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork
 const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!
+const connection = new anchor.web3.Connection(rpcHost)
 
-
+const txTimeout = 30000 // milliseconds (confirm this works for your project)
 
 const theme = createTheme({
   palette: {
@@ -62,8 +66,20 @@ const theme = createTheme({
 
 // Used for a multi-currency shop
 const currencyOptions = [
-  {currencySymbol: 'SOL', currencyDecimals: 9, priceDecimals: 3, volumeDecimals: 1},
-  {currencySymbol: 'USDC', currencyDecimals: 9, priceDecimals: 2, volumeDecimals: 1}
+  {
+    currencySymbol: 'SOL',
+    treasuryMint: 'So11111111111111111111111111111111111111112',
+    currencyDecimals: 9,
+    priceDecimals: 3,
+    volumeDecimals: 1
+  },
+  {
+    currencySymbol: '56p',
+    treasuryMint: '56pdaHboK66cxRLkzkYVvFSAjfoNEETJUsrdmAYaTXMJ',
+    currencyDecimals: 9,
+    priceDecimals: 2,
+    volumeDecimals: 1
+  }
 ];
 
 const App = () => {
@@ -99,7 +115,12 @@ const App = () => {
                       element={(
                         <>
                           <TopNav />
-                          <Home />
+                          <Home
+                            candyMachineId={candyMachineId}
+                            connection={connection}
+                            txTimeout={txTimeout}
+                            rpcHost={rpcHost}
+                          />
                         </>
                       )}
                     />
