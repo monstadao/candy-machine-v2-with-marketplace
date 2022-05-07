@@ -11,9 +11,10 @@ const Home = () => {
             
           </PageHeader>
           <PageLogo>
-            <a href="//discord.gg/kuPRwhHYks" data-aos="fade-up" data-aos-duration="2500"><PageSocial src="discord.png" alt="" ></PageSocial></a>
-            <a href="//www.instagram.com/monstadao_nft" data-aos="fade-up" data-aos-duration="2500"><PageSocial src="instagram.png" alt=""></PageSocial></a>
-            <a href="https://twitter.com/monstadao_"data-aos="fade-up" data-aos-duration="2500"><PageSocial src="twitter.png" alt=""></PageSocial></a>
+            <a href="//discord.gg/kuPRwhHYks" data-aos="fade-up" data-aos-duration="2500"><PageSocial src="discord2.png" alt="" ></PageSocial></a>
+            <a href="//www.instagram.com/monstadao_nft" data-aos="fade-up" data-aos-duration="2500"><PageSocial src="instagram2.png" alt=""></PageSocial></a>
+            <a href="https://twitter.com/monstadao_"data-aos="fade-up" data-aos-duration="2500"><PageSocial src="twitter2.png" alt=""></PageSocial></a>
+            <a href="https://marketplace.monstadao.com"data-aos="fade-up" data-aos-duration="2500"><PageSocial src="market.png" alt=""></PageSocial></a>
           </PageLogo>
         </PageItems>
       </PageContent>
@@ -54,8 +55,6 @@ const PageSocial = styled.img`
   &:hover{
         cursor: pointer;
         height: 70px;
-        -webkit-filter: hue-rotate(90deg); /* Safari 6.0 - 9.0 */
-        filter: grayscale(90deg);
     }
 
 `;
