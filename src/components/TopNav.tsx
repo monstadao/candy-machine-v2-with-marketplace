@@ -54,44 +54,23 @@ const TopNav: React.FC<TopNavProps> = ({
     <HeaderBar>
       <Logo>
         <Link to='/'>
-          <img alt='' src='/Monsta-Logo.png' />
+          <img alt='' src='/logo.png' />
         </Link>
       </Logo>
       <Menu>
         <li>
-          <Link to='/'>Home</Link>
+          <Link to='/'>MARKETPLACE</Link>
         </li>
         <li>
-          <Link to='/marketplace'>Marketplace</Link>
+          <Link to='/sell'>SELL</Link>
         </li>
-        <li>
-          <Link to='/sell'>Sell</Link>
-        </li>
-        <DropdownAnchor ref={anchorRef} onClick={handleToggle}>
-          Other Layouts
-          <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
-            {({ TransitionProps, placement }) => (
-              <Paper >
-                <ClickAwayListener onClickAway={handleClose}>
-                  <MenuList autoFocusItem={open} onKeyDown={handleListKeyDown}>
-                    <MenuItem><Link to='/custom-token-marketplace'>Custom Token Marketplace</Link></MenuItem>
-                    <MenuItem><Link to='/multi-collection-marketplace'>Multi Collection Marketplace</Link></MenuItem>
-                    <MenuItem><Link to='/marketplace-with-url'>Marketplace With URL</Link></MenuItem>
-                    <MenuItem><Link to='/multi-currency-marketplace'>Multi Currency Marketplace</Link></MenuItem>
-                    <MenuItem><Link to='/multi-currency-sell'>Multi Currency Sell</Link></MenuItem>
-                  </MenuList>
-                </ClickAwayListener>
-              </Paper>
-            )}
-          </Popper>
-        </DropdownAnchor>
       </Menu>
       { showCurrencyToggle && <CurrencyToggle />}
       <Wallet>
         {wallet ? (
           <ConnectButton />
         ) : (
-          <ConnectButton>Connect Wallet</ConnectButton>
+          <ConnectButton>CONNECT WALLET</ConnectButton>
         )}
       </Wallet>
     </HeaderBar>
@@ -105,34 +84,6 @@ const HeaderBar = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
-`
-
-const DropdownAnchor = styled.li`
-  cursor: pointer;
-
-  &:hover {
-    color: #8400ff;
-  }
-
-  > div {
-    z-index: 1000;
-  }
-
-  .MuiList-root {
-    margin-top: 15px;
-    background-color: #fff;
-
-    a {
-      padding-top: 4px;
-      padding-bottom: 4px;
-      color: #000;
-
-      &:hover {
-        border-bottom: 0px;
-        color: #8400ff;
-      }
-    }
-  }
 `
 
 // const WalletAmount = styled.div`
@@ -170,22 +121,11 @@ const Wallet = styled.ul`
 `
 
 const ConnectButton = styled(WalletMultiButton)`
-  border-radius: 12px !important;
+  border-radius: 9px !important;
   padding: 6px 16px;
+  color: #ca8a04;
+  background-color:#fde68a ;
   margin: 0 auto;
-  background: #ad11f5ac;
-    color: #fff;
-    font-weight: bold;
-    transition: 0.2s ease-out;
-    outline: none;
-    text-decoration: none;
-    
-    &:hover{
-        background: #20000071;
-        transition: 0.2s ease-out;
-        cursor: pointer;
-        color: #ad11f5ac;
-    }
 `
 
 const Logo = styled.div`
@@ -193,7 +133,7 @@ const Logo = styled.div`
   margin-right: 10px;
 
   img {
-    height: 100px;
+    height: 90px;
   }
 `
 
@@ -202,23 +142,22 @@ const Menu = styled.ul`
   display: inline-flex;
   flex: 1 0 auto;
   margin-bottom: 0;
-
+  
   li {
     margin: 0 12px;
-    font-size: 15px ;
-    font-weight: bold;
 
     a {
-      color: var(--main-text-color);
-      list-style-image: none;
-      list-style-position: outside;
-      list-style-type: none;
+      font-size:16px;
       outline: none;
-      text-decoration: none;
-      text-size-adjust: 100%;
+      border-radius:3px;
+      font-family: 'Outfit', sans-serif;
       touch-action: manipulation;
       transition: color 0.3s;
-      padding-bottom: 15px;
+      padding: 3px 10px 3px 10px;
+      letter-spacing: 2.3px;
+      font-weight: 500;
+      color:#ca8a04;
+      background-color:#fde68a ;
 
       img {
         max-height: 26px;
@@ -227,13 +166,9 @@ const Menu = styled.ul`
 
     a:hover,
     a:active {
-      color:#8400ff;
+      color:#fde68a ;
+      background-color: #ca8a04;
     }
-    @media (max-width: 700px) {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    
-  }
   }
 `
 

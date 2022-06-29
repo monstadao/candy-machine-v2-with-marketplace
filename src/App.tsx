@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from '@material-ui/core'
 import { useMemo } from 'react'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
-import * as anchor from '@project-serum/anchor'
+
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import {
@@ -17,27 +17,18 @@ import {
 } from '@solana/wallet-adapter-wallets'
 import { Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
-
+import MultiCurrencyMarketplace from './views/MultiCurrencyMarketplace'
 import TopNav from './components/TopNav'
 import { CurrencyProvider } from './components/Currency'
-import Home from './views/Home'
 import Marketplace from './views/Marketplace'
-import CustomTokenMarketplace from './views/CustomTokenMarketplace'
-import MarketplaceWithFilter from './views/MarketplaceWithFilter'
-import MarketplaceWithUrl from './views/MarketplaceWithUrl'
-import MultiCurrencyMarketplace from './views/MultiCurrencyMarketplace'
-import MultiCurrencySell from './views/MultiCurrencySell'
 import MyCollection from './views/MyCollection'
-import SingleOrder from './views/SingleOrder'
+
 
 require('@solana/wallet-adapter-react-ui/styles.css')
 
-const candyMachineId = new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID!)
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork
 const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!
-const connection = new anchor.web3.Connection(rpcHost)
 
-const txTimeout = 30000 // milliseconds (confirm this works for your project)
 
 const theme = createTheme({
   palette: {
@@ -115,29 +106,6 @@ const App = () => {
                       element={(
                         <>
                           <TopNav />
-                          <Home
-                            candyMachineId={candyMachineId}
-                            connection={connection}
-                            txTimeout={txTimeout}
-                            rpcHost={rpcHost}
-                          />
-                        </>
-                      )}
-                    />
-                    <Route
-                      path='/marketplace/:tokenMint'
-                      element={(
-                        <>
-                          <TopNav />
-                          <SingleOrder />
-                        </>
-                      )}
-                    />
-                    <Route
-                      path='/marketplace'
-                      element={(
-                        <>
-                          <TopNav />
                           <Marketplace />
                         </>
                       )}
@@ -148,51 +116,6 @@ const App = () => {
                         <>
                           <TopNav />
                           <MyCollection />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/custom-token-marketplace'
-                      element={
-                        <>
-                          <TopNav />
-                          <CustomTokenMarketplace />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/multi-collection-marketplace'
-                      element={
-                        <>
-                          <TopNav />
-                          <MarketplaceWithFilter />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/marketplace-with-url'
-                      element={
-                        <>
-                          <TopNav />
-                          <MarketplaceWithUrl />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/multi-currency-marketplace'
-                      element={
-                        <>
-                          <TopNav showCurrencyToggle={true} />
-                          <MultiCurrencyMarketplace />
-                        </>
-                      }
-                    />
-                    <Route
-                      path='/multi-currency-sell'
-                      element={
-                        <>
-                          <TopNav showCurrencyToggle={true} />
-                          <MultiCurrencySell />
                         </>
                       }
                     />

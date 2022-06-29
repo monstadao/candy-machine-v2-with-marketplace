@@ -1,28 +1,25 @@
 /* Customize your main colors in :root variables */
 :root {
-  --main-background-color: #28636b;
-  --card-background-color: #51576d;
+  --main-background-color: #FEF3C7;
+  --card-background-color: #FDE68A;
   --card-background-lighter-color: #7a7f92;
-  --main-text-color: #f7f6f4;
-  --title-text-color: #3cba8b;
+  --main-text-color: #a26d00;
+  --title-text-color: #ca8a04;
 }
 
 body {
-background: url('img/background.jpg');
-background-position: center center;
-background-attachment: fixed;
-background-size: cover;
-background-repeat: no-repeat;
+  background-color: var(--main-background-color);
+  /*background: url('img/background.png');
+  background-size: cover; */
 
   margin: 0;
-  font-family: 'Skranji', cursive;
+  font-family: 'Outfit', sans-serif;
   font-size:  16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #75949d;
-  color: #FFFFFF;
-
+  background-color: #FEF3C7;
+  color: #ca8a04;
 }
 
 code {

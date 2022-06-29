@@ -16,9 +16,13 @@ const DesContainer = styled.div`
 
   .wallet-adapter-button {
     margin: 0 auto;
+    background-color:#fde68a;
+    color:#ca8a04;
+    font-weight: 500;
+    font-family: 'Outfit', sans-serif;
   }
-`
 
+`
 const MyCollection: React.FC = () => {
   const wallet = useAnchorWallet()
 
@@ -33,11 +37,12 @@ const MyCollection: React.FC = () => {
 
   return (
     <DesContainer>
-      <h1 style={{ marginBottom: 30 }}>My Collection</h1>
+      <h1 style={{ marginBottom: 30 }}>MY COLLECTION</h1>
       <Sell
         wallet={wallet}
         candyShop={candyShopRef.current}
         walletConnectComponent={<WalletMultiButton />}
+        enableCacheNFT={true}
       />
     </DesContainer>
   )
