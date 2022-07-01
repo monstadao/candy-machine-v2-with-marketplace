@@ -67,22 +67,28 @@ const CurrencyToggleDiv = styled.div`
   display: flex;
   border-radius: 18px !important;
   padding: 6px 16px;
-  background-color: var(--card-background-lighter-color);
+  background-color: #FDE68A;
   align-items: center;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 500; 
   height: 50px;
   margin-right: 10px;
   cursor: pointer;
 
   .MuiList-root {
     margin-top: 15px;
-
+    background-color: #FDE68A;
+    color:#ca8a04;
+    font-weight: 500; 
     a {
       padding: 4px 12px;
-      color: #fff;
-
+      color: #ca8a04;
+      background-color: #FDE68A;
+      font-weight: 500;
       &:hover {
         border-bottom: 0px;
-        color: #fff;
+        color: #FDE68A;
+        background-color:#ca8a04;
       }
     }
   }

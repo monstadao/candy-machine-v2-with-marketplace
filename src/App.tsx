@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from '@material-ui/core'
 import { useMemo } from 'react'
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react'
-
+import * as anchor from '@project-serum/anchor'
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base'
 import { WalletModalProvider } from '@solana/wallet-adapter-react-ui'
 import {
@@ -17,18 +17,22 @@ import {
 } from '@solana/wallet-adapter-wallets'
 import { Route, Routes } from 'react-router-dom'
 import styled from 'styled-components'
-import MultiCurrencyMarketplace from './views/MultiCurrencyMarketplace'
+
 import TopNav from './components/TopNav'
 import { CurrencyProvider } from './components/Currency'
-import Marketplace from './views/Marketplace'
-import MyCollection from './views/MyCollection'
+import Home from './views/Home'
+import MultiCurrencyMarketplace from './views/MultiCurrencyMarketplace'
+import MultiCurrencySell from './views/MultiCurrencySell'
 
 
 require('@solana/wallet-adapter-react-ui/styles.css')
 
+const candyMachineId = new anchor.web3.PublicKey(process.env.REACT_APP_CANDY_MACHINE_ID!)
 const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork
 const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!
+const connection = new anchor.web3.Connection(rpcHost)
 
+const txTimeout = 30000 // milliseconds (confirm this works for your project)
 
 const theme = createTheme({
   palette: {
@@ -65,7 +69,7 @@ const currencyOptions = [
     volumeDecimals: 1
   },
   {
-    currencySymbol: '56p',
+    currencySymbol: 'LABS',
     treasuryMint: '56pdaHboK66cxRLkzkYVvFSAjfoNEETJUsrdmAYaTXMJ',
     currencyDecimals: 9,
     priceDecimals: 2,
@@ -74,9 +78,6 @@ const currencyOptions = [
 ];
 
 const App = () => {
-  // @solana/wallet-adapter-wallets includes all the adapters but supports tree shaking and lazy loading --
-  // Only the wallets you configure here will be compiled into your application, and only the dependencies
-  // of wallets that your users connect to will be loaded.
   const wallets = useMemo(
     () => [
       getPhantomWallet(),
@@ -106,16 +107,25 @@ const App = () => {
                       element={(
                         <>
                           <TopNav />
-                          <Marketplace />
+                          <Home/>
                         </>
                       )}
                     />
                     <Route
-                      path='/sell'
+                      path='/multi-currency-marketplace'
                       element={
                         <>
-                          <TopNav />
-                          <MyCollection />
+                          <TopNav showCurrencyToggle={true} />
+                          <MultiCurrencyMarketplace />
+                        </>
+                      }
+                    />
+                    <Route
+                      path='/multi-currency-sell'
+                      element={
+                        <>
+                          <TopNav showCurrencyToggle={true} />
+                          <MultiCurrencySell />
                         </>
                       }
                     />

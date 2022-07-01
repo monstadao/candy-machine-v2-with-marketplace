@@ -59,18 +59,30 @@ const TopNav: React.FC<TopNavProps> = ({
       </Logo>
       <Menu>
         <li>
-          <Link to='/'>MARKETPLACE</Link>
+          <Link to='/'>HOME</Link>
         </li>
-        <li>
-          <Link to='/sell'>SELL</Link>
-        </li>
+        <DropdownAnchor ref={anchorRef} onClick={handleToggle}>
+          BUY OR SELL
+          <Popper open={open} anchorEl={anchorRef.current} role={undefined} transition disablePortal>
+            {({ TransitionProps, placement }) => (
+              <Paper>
+                <ClickAwayListener onClickAway={handleClose}>
+                  <MenuList autoFocusItem={open} onKeyDown={handleListKeyDown}>
+                    <MenuItem><Link to='/multi-currency-marketplace'>BUY UR NFT</Link></MenuItem>
+                    <MenuItem><Link to='/multi-currency-sell'>SELL UR NFT</Link></MenuItem>
+                  </MenuList>
+                </ClickAwayListener>
+              </Paper>
+            )}
+          </Popper>
+        </DropdownAnchor>
       </Menu>
       { showCurrencyToggle && <CurrencyToggle />}
       <Wallet>
         {wallet ? (
           <ConnectButton />
         ) : (
-          <ConnectButton>CONNECT WALLET</ConnectButton>
+          <ConnectButton>Connect Wallet</ConnectButton>
         )}
       </Wallet>
     </HeaderBar>
@@ -84,6 +96,46 @@ const HeaderBar = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 30px;
+`
+
+const DropdownAnchor = styled.li`
+  cursor: pointer;
+  font-size:16px;
+  outline: none;
+  border-radius:3px;
+  font-family: 'Outfit', sans-serif;
+  touch-action: manipulation;
+  transition: color 0.3s;
+  padding-left: 5px ;
+  padding-right: 5px;
+  letter-spacing: 2.3px;
+  font-weight: 500;
+  color:#ca8a04;
+  background-color:#fde68a ;
+  
+  &:hover {
+    color:#fde68a ;
+      background-color: #ca8a04;
+  }
+
+  > div {
+    z-index: 1000;
+  }
+
+  .MuiList-root {
+    margin-top: 15px;
+    background-color: #FDE68A;
+    border-radius:3px ;
+    a {
+      padding-top: 4px;
+      padding-bottom: 4px;
+      
+      &:hover {
+        color:#fde68a ;
+      background-color: #ca8a04;
+      }
+    }
+  }
 `
 
 // const WalletAmount = styled.div`
@@ -160,7 +212,7 @@ const Menu = styled.ul`
       background-color:#fde68a ;
 
       img {
-        max-height: 26px;
+        max-height: 30px;
       }
     }
 
