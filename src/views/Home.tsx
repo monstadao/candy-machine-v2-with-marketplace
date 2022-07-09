@@ -6,7 +6,7 @@ const Home = () => {
     <>
     <Container>
       <Section>
-        <img src="monstaa.png" />
+        <img src="monstapeople.png" />
       </Section>
     </Container>
     <FooterContainer>
